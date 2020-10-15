@@ -13,6 +13,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Config struct {
@@ -33,7 +34,7 @@ func main() {
 	fileWatcher.WatchResume(initProject)
 }
 
-func initProject()  {
+func initProject() {
 	//加载配置文件
 	conf := loadConfig()
 	//初始化email
@@ -59,8 +60,10 @@ func initIndex(router *gin.Engine, conf Config) {
 	}
 	router.SetHTMLTemplate(t)
 	router.GET("/", func(c *gin.Context) {
+		tmpl := loadStringFile("./assets/resume.tmpl")
 		c.HTML(http.StatusOK, "/html/index.tmpl", gin.H{
-			"title": conf.Title,
+			"title":  conf.Title,
+			"resume": template.HTML(tmpl),
 		})
 	})
 }
@@ -85,23 +88,47 @@ func loadTemplate() (*template.Template, error) {
 }
 
 func initRouter(router *gin.Engine, e *gomail.Dialer, conf Config) {
+	addressMap := map[string]time.Time{}
+	ipMap := map[string]int{}
 	//发送邮件
 	router.POST("/api/send-email", func(context *gin.Context) {
+		clientIP := context.ClientIP()
 		address := context.PostForm("address")
+		if _, hasAddress := addressMap[address]; hasAddress && time.Now().Sub(addressMap[address]).Minutes() < 1 {
+			//存在历史邮件地址
+			context.JSON(http.StatusOK, gin.H{
+				"msg":    "发送间隔小于1分钟，请稍后再试！",
+				"status": 0,
+			})
+			return
+		}
+		if _, hasIP := ipMap[clientIP]; hasIP && ipMap[clientIP] > 9 {
+			//ip发送次数
+			context.JSON(http.StatusOK, gin.H{
+				"msg":    "同一IP一天最多发送10次！",
+				"status": 0,
+			})
+			return
+		}
 		if address == "" {
 			context.JSON(http.StatusMethodNotAllowed, gin.H{
-				"msg": "未获取到地址",
+				"msg":    "未获取到地址",
+				"status": 0,
 			})
 			return
 		}
 		err := sendEmail(conf, address, e)
+		addressMap[address] = time.Now()
+		ipMap[context.ClientIP()] = ipMap[context.ClientIP()] + 1
 		if err != nil {
 			context.JSON(http.StatusOK, gin.H{
-				"msg": "发送失败！" + err.Error(),
+				"msg":    "发送失败！" + err.Error(),
+				"status": 0,
 			})
 		} else {
 			context.JSON(http.StatusOK, gin.H{
-				"msg": "发送成功！",
+				"msg":    "发送成功！",
+				"status": 1,
 			})
 		}
 	})
@@ -139,4 +166,11 @@ func sendEmail(conf Config, address string, e *gomail.Dialer) error {
 	mail.Attach("./assets/resume.pdf", gomail.Rename(conf.Title+".pdf"))
 	err := e.DialAndSend(mail)
 	return err
+}
+
+func loadStringFile(p string) string {
+	file, _ := os.Open(p)
+	defer file.Close()
+	content, _ := ioutil.ReadAll(file)
+	return string(content)
 }

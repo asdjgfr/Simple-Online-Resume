@@ -20,9 +20,17 @@ async function clickEmailBtn() {
     if (emailReg.test(p)) {
         this.setAttribute("disabled", "disabled")
         this.innerText = "邮件发送中..."
-        const res = await sendEmail(p);
+        let res = {}
+        try {
+            res = await sendEmail(p);
+        } catch (e) {
+            alert(`错误：${e}`)
+        }
         this.removeAttribute("disabled")
-        this.innerText = res.msg + "，重新发送"
+        if (res.status === 0 || res.status === 1) {
+            alert(res.msg)
+        }
+        this.innerText = "重新发送"
     } else {
         alert("请输入正确的邮箱地址！名称允许汉字、字母、数字，域名只允许英文域名。");
         await clickEmailBtn()
