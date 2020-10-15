@@ -40,4 +40,3 @@ function sendEmail(address) {
     }).then(res => res.json());
 }
 
-PDFObject.embed("/assets/resume.pdf", "#pdf");

@@ -52,12 +52,12 @@ func WatchResume(cb Cb) {
 
 func rebuildResume()  {
 	//重新生成html和pdf
-	cmd := exec.Command("./bin/pandoc", "./assets/resume.md","-o","assets/resume.tmpl")
-
+	cmd := exec.Command("bash", "-c", "./bin/pandoc ./assets/resume.md -t html -o ./assets/resume.tmpl ; ./bin/pandoc ./assets/resume.md --pdf-engine=xelatex -t latex -V CJKmainfont='Droid Sans Fallback' -o ./assets/resume.pdf")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
 		log.Fatalf("cmd.Run() failed with %s\n", err)
 	}
+	log.Println("生成resume成功")
 }
