@@ -52,8 +52,8 @@ func WatchResume(cb Cb) {
 
 func rebuildResume()  {
 	//重新生成html和pdf
-	//cmd := exec.Command("./bin/pandoc", "./assets/resume.md","-o","assets/resume.tmpl")
-	cmd := exec.Command("pwd")
+	cmd := exec.Command("./bin/pandoc", "./assets/resume.md","-o","assets/resume.tmpl")
+
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
