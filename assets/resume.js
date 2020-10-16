@@ -1,5 +1,7 @@
 const downloadBtn = document.querySelector("#download");
 const sendEmailBtn = document.querySelector("#send-to-email");
+const toolBar = document.querySelector("#tool-bar");
+const header = document.querySelector("#header");
 const emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
 
 downloadBtn.addEventListener("click", () => {
@@ -46,5 +48,17 @@ function sendEmail(address) {
         },
         method: 'POST',
     }).then(res => res.json());
+}
+
+window.addEventListener("scroll", changeHeaderAndToolBar);
+
+changeHeaderAndToolBar();
+
+function changeHeaderAndToolBar(e) {
+    const above100 = document.body.getBoundingClientRect().top < -100
+    toolBar.style.bottom = above100 ? 0 : -60 + "px";
+    if (e) {
+        header.style.opacity = "0";
+    }
 }
 

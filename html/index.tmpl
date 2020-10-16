@@ -9,11 +9,16 @@
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-<div class="tool-bar">
+<header>
+    <div class="header" id="header">
+        <strong>如果遇到排版混乱，下载失败，发送邮件失败等问题请使用Chrome等现代浏览器访问！</strong>
+    </div>
+</header>
+<div id="resume">{{.resume}}</div>
+<div class="tool-bar" id="tool-bar">
     <button id="download">下载到本地</button>
     <button id="send-to-email">发送到邮箱</button>
 </div>
-<div id="resume">{{.resume}}</div>
 <script src="/assets/resume.js"></script>
 </body>
 </html>
