@@ -3,6 +3,8 @@
 CURDIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd )
 # 尝试创建build文件夹
 mkdir ./build/;
+# 尝试清空build文件夹
+rm -rf ./build/*;
 # 尝试创建二进制文件夹
 mkdir ./build/bin;
 echo "创建bin文件夹完成"

@@ -10,19 +10,19 @@ var _Assets3737a75b5254ed1f6d588b40a3449721f9ea86c2 = "<!DOCTYPE html>\r\n<html 
 
 // Assets returns go-assets FileSystem
 var Assets = assets.NewFileSystem(map[string][]string{"/": []string{"html"}, "/html": []string{"index.tmpl"}}, map[string]*assets.File{
-	"/": &assets.File{
+	"/html/index.tmpl": &assets.File{
+		Path:     "/html/index.tmpl",
+		FileMode: 0x1ff,
+		Mtime:    time.Unix(1602829368, 1602829368387561700),
+		Data:     []byte(_Assets3737a75b5254ed1f6d588b40a3449721f9ea86c2),
+	}, "/": &assets.File{
 		Path:     "/",
 		FileMode: 0x800001ff,
-		Mtime:    time.Unix(1602752662, 1602752662559110000),
+		Mtime:    time.Unix(1602829560, 1602829560126649200),
 		Data:     nil,
 	}, "/html": &assets.File{
 		Path:     "/html",
 		FileMode: 0x800001ff,
-		Mtime:    time.Unix(1602827367, 1602827367229841400),
+		Mtime:    time.Unix(1602829368, 1602829368388558800),
 		Data:     nil,
-	}, "/html/index.tmpl": &assets.File{
-		Path:     "/html/index.tmpl",
-		FileMode: 0x1ff,
-		Mtime:    time.Unix(1602827367, 1602827367228844700),
-		Data:     []byte(_Assets3737a75b5254ed1f6d588b40a3449721f9ea86c2),
 	}}, "")
