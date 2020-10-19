@@ -11,13 +11,13 @@
 <body>
 <header>
     <div class="header" id="header">
-        <strong>如果遇到排版混乱，下载失败，发送邮件失败等问题请使用Chrome等现代浏览器访问！</strong>
+        <strong>{{.i18n.Header}}</strong>
     </div>
 </header>
 <div id="resume">{{.resume}}</div>
 <div class="tool-bar" id="tool-bar">
-    <button id="download">下载到本地</button>
-    <button id="send-to-email">发送到邮箱</button>
+    <button id="download">{{.i18n.Download}}</button>
+    <button id="send-to-email">{{.i18n.SendToEmail}}</button>
 </div>
 <script src="/assets/resume.js"></script>
 </body>

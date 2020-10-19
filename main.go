@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"myModule/bindata"
 	"myModule/fileWatcher"
+	"myModule/types"
 	"net/http"
 	"os"
 	"strconv"
@@ -16,27 +17,14 @@ import (
 	"time"
 )
 
-type Config struct {
-	Title    string //标题
-	From     string //发件人
-	Subject  string //邮件标题
-	Text     string //邮件正文
-	HTML     string //邮件正文 html格式
-	SMTP     string //smtp地址
-	Port     int    //端口
-	SMTPPort int    //发送端口
-	Username string //邮件用户名
-	Password string //邮件密码
-}
-
 func main() {
-	//监听resume.md的变化
-	fileWatcher.WatchResume(initProject)
-}
-
-func initProject() {
 	//加载配置文件
 	conf := loadConfig()
+	//监听resume.md的变化
+	fileWatcher.WatchResume(initProject, conf)
+}
+
+func initProject(conf types.Config) {
 	//初始化email
 	e := initEmail(conf)
 	//初始化gin
@@ -52,7 +40,7 @@ func initProject() {
 	}
 }
 
-func initIndex(router *gin.Engine, conf Config) {
+func initIndex(router *gin.Engine, conf types.Config) {
 	//加载html模板
 	t, err := loadTemplate()
 	if err != nil {
@@ -64,6 +52,7 @@ func initIndex(router *gin.Engine, conf Config) {
 		c.HTML(http.StatusOK, "/html/index.tmpl", gin.H{
 			"title":  conf.Title,
 			"resume": template.HTML(tmpl),
+			"i18n":   conf.I18n[conf.Language],
 		})
 	})
 }
@@ -87,7 +76,7 @@ func loadTemplate() (*template.Template, error) {
 	return t, nil
 }
 
-func initRouter(router *gin.Engine, e *gomail.Dialer, conf Config) {
+func initRouter(router *gin.Engine, e *gomail.Dialer, conf types.Config) {
 	addressMap := map[string]time.Time{}
 	ipMap := map[string]int{}
 	//发送邮件
@@ -134,10 +123,10 @@ func initRouter(router *gin.Engine, e *gomail.Dialer, conf Config) {
 	})
 }
 
-func loadConfig() Config {
+func loadConfig() types.Config {
 	filePtr, _ := os.Open("./config.json")
 	defer filePtr.Close()
-	var conf Config
+	var conf types.Config
 	decoder := json.NewDecoder(filePtr)
 	err := decoder.Decode(&conf)
 	if err != nil {
@@ -148,14 +137,14 @@ func loadConfig() Config {
 	return conf
 }
 
-func initEmail(conf Config) *gomail.Dialer {
+func initEmail(conf types.Config) *gomail.Dialer {
 	e := gomail.NewDialer(conf.SMTP, conf.SMTPPort, conf.Username, conf.Password)
 	//使用ssl
 	e.SSL = true
 	return e
 }
 
-func sendEmail(conf Config, address string, e *gomail.Dialer) error {
+func sendEmail(conf types.Config, address string, e *gomail.Dialer) error {
 	//发送邮件
 	mail := gomail.NewMessage()
 	mail.SetHeader("From", conf.Username)

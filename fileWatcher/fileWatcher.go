@@ -4,17 +4,21 @@ import (
 	"github.com/bep/debounce"
 	"github.com/fsnotify/fsnotify"
 	"log"
+	"myModule/types"
 	"os"
 	"os/exec"
 	"time"
 )
 
-type Cb func()
+type Cb func(types.Config)
 
-func WatchResume(cb Cb) {
+func WatchResume(cb Cb, conf types.Config) {
 	debounced := debounce.New(100 * time.Millisecond)
 	//项目启动时重新生成resume
-	debounced(rebuildResume)
+	debounced(func() {
+		//100毫秒内只触发一次
+		rebuildResume(conf)
+	})
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		log.Fatal("新建错误：", err)
@@ -30,8 +34,9 @@ func WatchResume(cb Cb) {
 					return
 				}
 				if event.Op&fsnotify.Write == fsnotify.Write {
-					//100毫秒内只触发一次
-					debounced(rebuildResume)
+					debounced(func() {
+						rebuildResume(conf)
+					})
 				}
 			case err, ok := <-watcher.Errors:
 				if !ok {
@@ -46,13 +51,13 @@ func WatchResume(cb Cb) {
 		log.Fatal("添加监听错误：", err)
 	}
 	//回调事件
-	cb()
+	cb(conf)
 	<-done
 }
 
-func rebuildResume()  {
+func rebuildResume(conf types.Config) {
 	//重新生成html和pdf
-	cmd := exec.Command("bash", "-c", "./bin/pandoc ./assets/resume.md -t html -o ./assets/resume.tmpl ; ./bin/pandoc --highlight-style zenburn ./assets/resume.md --pdf-engine=xelatex -t latex -V CJKmainfont='Droid Sans Fallback' -V colorlinks -V urlcolor=NavyBlue -o ./assets/resume.pdf")
+	cmd := exec.Command("bash", "-c", "./bin/pandoc ./assets/resume.md -t html -o ./assets/resume.tmpl ; ./bin/pandoc --highlight-style zenburn ./assets/resume.md --pdf-engine=xelatex -t latex -V CJKmainfont='"+conf.Font+"' -V colorlinks -V urlcolor=NavyBlue -o ./assets/resume.pdf")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
