@@ -1,0 +1,25 @@
+{
+  "title": "rm",
+  "subject": "测试标题",
+  "text": "巴拉巴拉古娜拉黑暗之神---呜呼啦呼---黑魔变身",
+  "html": "<h1>html格式哦哦哦</h1>",
+  "SMTP": "smtp.exmail.qq.com",
+  "port": 6001,
+  "SMTPPort": 465,
+  "username": "用户名",
+  "password": "密码",
+  "font": "Droid Sans Fallback",
+  "language": "zh-CN",
+  "i18n": {
+    "zh-CN": {
+      "download": "下载到本地",
+      "sendToEmail": "发送到邮箱",
+      "header": "如果遇到排版混乱，下载失败，发送邮件失败等问题请使用Chrome等现代浏览器访问！"
+    },
+    "en": {
+      "download": "download",
+      "sendToEmail": "send to Email",
+      "header": "If something looks not good,please use Chrome or other modern browser!"
+    }
+  }
+}
