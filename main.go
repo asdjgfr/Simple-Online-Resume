@@ -53,6 +53,7 @@ func initIndex(router *gin.Engine, conf types.Config) {
 			"title":  conf.Title,
 			"resume": template.HTML(tmpl),
 			"i18n":   conf.I18n[conf.Language],
+			"scripts":conf.Scripts,
 		})
 	})
 }

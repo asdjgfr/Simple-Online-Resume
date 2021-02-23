@@ -21,5 +21,6 @@
       "sendToEmail": "send to Email",
       "header": "If something looks not good,please use Chrome or other modern browser!"
     }
-  }
+  },
+  "scripts": []
 }

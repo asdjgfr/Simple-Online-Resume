@@ -18,4 +18,5 @@ type Config struct {
 		SendToEmail string
 		Header      string
 	}
+	Scripts []string
 }
