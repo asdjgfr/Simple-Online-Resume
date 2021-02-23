@@ -13,7 +13,7 @@ var Assets = assets.NewFileSystem(map[string][]string{"/": []string{"html"}, "/h
 	"/": &assets.File{
 		Path:     "/",
 		FileMode: 0x800001ff,
-		Mtime:    time.Unix(1614063541, 1614063541949678900),
+		Mtime:    time.Unix(1614063656, 1614063656971053400),
 		Data:     nil,
 	}, "/html": &assets.File{
 		Path:     "/html",
