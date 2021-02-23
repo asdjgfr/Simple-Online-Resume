@@ -19,9 +19,9 @@ import (
 
 func main() {
 	//加载配置文件
-	conf := loadConfig()
+	Conf := loadConfig()
 	//监听resume.md的变化
-	fileWatcher.WatchResume(initProject, conf)
+	fileWatcher.WatchResume(initProject, Conf)
 }
 
 func initProject(conf types.Config) {
@@ -152,7 +152,7 @@ func sendEmail(conf types.Config, address string, e *gomail.Dialer) error {
 	mail.SetHeader("Subject", conf.Subject)
 	mail.SetBody("text/plain", conf.Text)
 	mail.SetBody("text/html", conf.HTML)
-	mail.Attach("./assets/resume.pdf", gomail.Rename(conf.Title+".pdf"))
+	mail.Attach("./assets/"+conf.Title+".pdf", gomail.Rename(conf.Title+".pdf"))
 	err := e.DialAndSend(mail)
 	return err
 }

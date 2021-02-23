@@ -13,12 +13,12 @@ var Assets = assets.NewFileSystem(map[string][]string{"/": []string{"html"}, "/h
 	"/": &assets.File{
 		Path:     "/",
 		FileMode: 0x800001ff,
-		Mtime:    time.Unix(1614048724, 1614048724611105700),
+		Mtime:    time.Unix(1614062226, 1614062226418696400),
 		Data:     nil,
 	}, "/html": &assets.File{
 		Path:     "/html",
 		FileMode: 0x800001ff,
-		Mtime:    time.Unix(1603077881, 1603077881000000000),
+		Mtime:    time.Unix(1614054503, 1614054503332097400),
 		Data:     nil,
 	}, "/html/index.tmpl": &assets.File{
 		Path:     "/html/index.tmpl",

@@ -7,7 +7,7 @@ const emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
 downloadBtn.addEventListener("click", () => {
     const dlDom = document.createElement("a");
     dlDom.download = document.title + ".pdf";
-    dlDom.href = "/assets/resume.pdf";
+    dlDom.href = "/assets/"+document.title+".pdf";
     dlDom.click();
 });
 

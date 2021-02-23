@@ -67,7 +67,7 @@ func rebuildResume(conf types.Config) {
 		log.Fatalf("替换路径失败： %s\n", err)
 	}
 	//重新生成html和pdf
-	cmd := exec.Command("bash", "-c", "./bin/pandoc "+resumePath+".tmp.md -t html -o ./assets/resume.tmpl ; ./bin/pandoc --highlight-style zenburn "+resumePath+".tmp.md --pdf-engine=xelatex -t latex -V CJKmainfont='"+conf.Font+"' -V colorlinks -V urlcolor=NavyBlue -o ./assets/resume.pdf")
+	cmd := exec.Command("bash", "-c", "./bin/pandoc "+resumePath+".tmp.md -t html -o ./assets/resume.tmpl ; ./bin/pandoc --highlight-style zenburn "+resumePath+".tmp.md --pdf-engine=xelatex -t latex -V CJKmainfont='"+conf.Font+"' -V colorlinks -V urlcolor=NavyBlue -o ./assets/"+conf.Title+".pdf")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
