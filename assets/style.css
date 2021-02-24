@@ -98,7 +98,7 @@ a:hover {
     color: var(--select-text-font-color);
 }
 
-#resume {
+#content {
     margin: 0 auto;
     height: auto;
     width: inherit;
@@ -111,20 +111,20 @@ a:hover {
     padding-bottom: 50px;
 }
 
-#resume.first-line-indent p {
+#content.first-line-indent p {
     text-indent: 2em;
 }
 
-#resume.first-line-indent li p,
-#resume.first-line-indent p * {
+#content.first-line-indent li p,
+#content.first-line-indent p * {
     text-indent: 0;
 }
 
-#resume.first-line-indent li {
+#content.first-line-indent li {
     margin-left: 2em;
 }
 
-.for-image #resume {
+.for-image #content {
     padding-left: 8px;
     padding-right: 8px;
 }
@@ -150,7 +150,7 @@ body.typora-export {
         padding-right: 0;
     }
 
-    #resume {
+    #content {
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -164,12 +164,12 @@ body.typora-export {
     }
 }
 
-#resume li > figure:last-child {
+#content li > figure:last-child {
     margin-bottom: 0.5rem;
 }
 
-#resume ol,
-#resume ul {
+#content ol,
+#content ul {
     position: relative;
 }
 
@@ -199,24 +199,24 @@ input[type="radio"] {
     box-sizing: border-box;
 }
 
-#resume h1,
-#resume h2,
-#resume h3,
-#resume h4,
-#resume h5,
-#resume h6,
-#resume p,
-#resume pre {
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6,
+#content p,
+#content pre {
     width: inherit;
 }
 
-#resume h1,
-#resume h2,
-#resume h3,
-#resume h4,
-#resume h5,
-#resume h6,
-#resume p {
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6,
+#content p {
     position: relative;
 }
 
@@ -305,7 +305,7 @@ sup.md-footnote a:hover {
     text-decoration: inherit;
 }
 
-#resume input[type="checkbox"] {
+#content input[type="checkbox"] {
     cursor: pointer;
     width: inherit;
     height: inherit;
@@ -373,16 +373,16 @@ div.hr:focus {
     cursor: none;
 }
 
-#resume pre {
+#content pre {
     white-space: pre-wrap;
     background: #f8f8f8;
 }
 
-#resume.fences-no-line-wrapping pre {
+#content.fences-no-line-wrapping pre {
     white-space: pre;
 }
 
-#resume pre.ty-contain-cm {
+#content pre.ty-contain-cm {
     white-space: normal;
 }
 
@@ -410,7 +410,7 @@ div.hr:focus {
     overflow-x: auto;
 }
 
-#resume .md-fences.mock-cm {
+#content .md-fences.mock-cm {
     white-space: pre-wrap;
 }
 
@@ -418,7 +418,7 @@ div.hr:focus {
     padding-left: 0;
 }
 
-#resume.fences-no-line-wrapping .md-fences.mock-cm {
+#content.fences-no-line-wrapping .md-fences.mock-cm {
     white-space: pre;
     overflow-x: auto;
 }
@@ -500,7 +500,7 @@ li > :first-child {
     white-space: normal;
 }
 
-#resume .footnote-line {
+#content .footnote-line {
     white-space: pre-wrap;
 }
 
@@ -514,7 +514,7 @@ li > :first-child {
         font-variant-ligatures: no-common-ligatures;
     }
 
-    #resume {
+    #content {
         margin-top: 0;
         padding-top: 0;
         border-color: transparent !important;
@@ -528,11 +528,11 @@ li > :first-child {
         font-size: 13px;
     }
 
-    .typora-export #resume {
+    .typora-export #content {
         break-after: avoid;
     }
 
-    .typora-export #resume::after {
+    .typora-export #content::after {
         height: 0;
     }
 
@@ -566,7 +566,7 @@ p > img:only-child {
     margin: auto;
 }
 
-#resume.first-line-indent p > .md-image:only-child:not(.md-img-error) img {
+#content.first-line-indent p > .md-image:only-child:not(.md-img-error) img {
     left: -2em;
     position: relative;
 }
@@ -576,7 +576,7 @@ p > .md-image:only-child {
     width: 100%;
 }
 
-#resume .MathJax_Display {
+#content .MathJax_Display {
     margin: 0.8em 0 0;
 }
 
@@ -1172,7 +1172,7 @@ body {
     line-height: 1.6;
 }
 
-#resume {
+#content {
     max-width: 860px;
     margin: 0 auto;
     padding: 30px;
@@ -1180,19 +1180,19 @@ body {
 }
 
 @media only screen and (min-width: 1400px) {
-    #resume {
+    #content {
         max-width: 1024px;
     }
 }
 
 @media only screen and (min-width: 1800px) {
-    #resume {
+    #content {
         max-width: 1200px;
     }
 }
 
-#resume > ul:first-child,
-#resume > ol:first-child {
+#content > ul:first-child,
+#content > ol:first-child {
     margin-top: 30px;
 }
 
@@ -1448,7 +1448,7 @@ code {
     background-color: #f8f8f8;
 }
 
-#resume pre.md-meta-block {
+#content pre.md-meta-block {
     padding: 1rem;
     font-size: 85%;
     line-height: 1.45;
@@ -1467,22 +1467,22 @@ code {
     background: #fafafa;
 }
 
-#resume > h3.md-focus:before {
+#content > h3.md-focus:before {
     left: -1.5625rem;
     top: 0.375rem;
 }
 
-#resume > h4.md-focus:before {
+#content > h4.md-focus:before {
     left: -1.5625rem;
     top: 0.285714286rem;
 }
 
-#resume > h5.md-focus:before {
+#content > h5.md-focus:before {
     left: -1.5625rem;
     top: 0.285714286rem;
 }
 
-#resume > h6.md-focus:before {
+#content > h6.md-focus:before {
     left: -1.5625rem;
     top: 0.285714286rem;
 }

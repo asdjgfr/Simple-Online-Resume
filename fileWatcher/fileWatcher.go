@@ -18,7 +18,7 @@ type Cb func(types.Config)
 
 func WatchResume(cb Cb, conf types.Config) {
 	debounced := debounce.New(100 * time.Millisecond)
-	//项目启动时重新生成resume
+	//项目启动时重新生成
 	debounced(func() {
 		//100毫秒内只触发一次
 		rebuildResume(conf)
@@ -50,7 +50,7 @@ func WatchResume(cb Cb, conf types.Config) {
 			}
 		}
 	}()
-	err = watcher.Add("./assets/resume.md")
+	err = watcher.Add("./assets/input.md")
 	if err != nil {
 		log.Fatal("添加监听错误：", err)
 	}
@@ -61,21 +61,21 @@ func WatchResume(cb Cb, conf types.Config) {
 
 func rebuildResume(conf types.Config) {
 	//替换路径
-	var resumePath="./assets/resume.md"
-	err:= replacePath(resumePath)
+	var inputPath="./assets/input.md"
+	err:= replacePath(inputPath)
 	if err!=nil {
 		log.Fatalf("替换路径失败： %s\n", err)
 	}
 	//重新生成html和pdf
-	cmd := exec.Command("bash", "-c", "./bin/pandoc "+resumePath+".tmp.md -t html -o ./assets/resume.tmpl ; ./bin/pandoc --highlight-style zenburn "+resumePath+".tmp.md --pdf-engine=xelatex -t latex -V CJKmainfont='"+conf.Font+"' -V colorlinks -V urlcolor=NavyBlue -o ./assets/"+conf.Title+".pdf")
+	cmd := exec.Command("bash", "-c", "./bin/pandoc "+inputPath+".tmp.md -t html -o ./assets/input.tmpl ; ./bin/pandoc --highlight-style zenburn "+inputPath+".tmp.md --pdf-engine=xelatex -t latex -V CJKmainfont='"+conf.Font+"' -V colorlinks -V urlcolor=NavyBlue -o ./assets/"+conf.Title+".pdf")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
 	if err != nil {
-		log.Fatalf("生成resume失败： %s\n", err)
+		log.Fatalf("生成文件失败： %s\n", err)
 	}
-	log.Println("生成resume成功")
-	_ = os.Remove(resumePath+".tmp.md")
+	log.Println("生成文件成功")
+	_ = os.Remove(inputPath+".tmp.md")
 }
 
 func replacePath(path string) error {

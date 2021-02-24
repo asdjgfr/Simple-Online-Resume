@@ -20,7 +20,7 @@ import (
 func main() {
 	//加载配置文件
 	Conf := loadConfig()
-	//监听resume.md的变化
+	//监听input.md的变化
 	fileWatcher.WatchResume(initProject, Conf)
 }
 
@@ -48,10 +48,10 @@ func initIndex(router *gin.Engine, conf types.Config) {
 	}
 	router.SetHTMLTemplate(t)
 	router.GET("/", func(c *gin.Context) {
-		tmpl := loadStringFile("./assets/resume.tmpl")
+		tmpl := loadStringFile("./assets/input.tmpl")
 		c.HTML(http.StatusOK, "/html/index.tmpl", gin.H{
 			"title":  conf.Title,
-			"resume": template.HTML(tmpl),
+			"content": template.HTML(tmpl),
 			"i18n":   conf.I18n[conf.Language],
 			"scripts":conf.Scripts,
 		})
