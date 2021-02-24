@@ -6,20 +6,20 @@
 </details>
 
 
-<h1 align="center">Simple Online Resume</h1>
+<h1 align="center">auto-md2pdf</h1>
 
 <div align="center">
 	A markdown to online and pdf program. Support download and send email.
     <br/>
-    Markdown转在线和pdf的简历网站，支持下载和邮件发送。
+    Markdown转在线和pdf的网站，支持下载和邮件发送。
 </div>
 
 
-![截图1](https://github.com/asdjgfr/resume/blob/master/screenshot/p1.png?raw=true)
+![截图1](https://raw.githubusercontent.com/asdjgfr/auto-md2pdf/master/screenshot/p1.png)
 
 # config.json
 
-- `title` - Website title, also resume `pdf` file name. 网站标题同时也是`pdf`的文件名称，例如`xxx的个人简历`。
+- `title` - Website title, also output `pdf` file name. 网站标题同时也是`pdf`的文件名称，例如`xxx的个人简历`。
 - `subject` - Email title. 邮件的标题。
 - `text` - Email content text. 邮件的正文。
 - `html` - Email content `html` format. 邮件的正文，`html`格式。
@@ -68,7 +68,7 @@ You can use `fc-list` to search which font has been used on your `os`.
 
 # Use
 
-1. Download lastest [release](https://github.com/asdjgfr/resume/releases)
+1. Download lastest [release](https://github.com/asdjgfr/auto-md2pdf/releases)
 
 2. install `texlive-xetex` on your server.
 
@@ -84,4 +84,4 @@ You can use `fc-list` to search which font has been used on your `os`.
    ./main
    ```
 
->  Change `assets/resume.md` and refresh browser. It can auto build resume without restart.
+>  Change `assets/input.md` and refresh browser. It can auto build input file without restart.
