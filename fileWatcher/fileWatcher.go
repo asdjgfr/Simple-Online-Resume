@@ -3,8 +3,6 @@ package fileWatcher
 import (
 	"bufio"
 	"bytes"
-	"github.com/bep/debounce"
-	"github.com/fsnotify/fsnotify"
 	"io"
 	"log"
 	"myModule/types"
@@ -12,6 +10,9 @@ import (
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/bep/debounce"
+	"github.com/fsnotify/fsnotify"
 )
 
 type Cb func(types.Config)
@@ -67,7 +68,7 @@ func rebuildResume(conf types.Config) {
 		log.Fatalf("替换路径失败： %s\n", err)
 	}
 	//重新生成html和pdf
-	cmd := exec.Command("bash", "-c", "./bin/pandoc "+inputPath+".tmp.md -t html -o ./assets/input.tmpl ; ./bin/pandoc --highlight-style zenburn "+inputPath+".tmp.md --pdf-engine=xelatex -t latex -V CJKmainfont='"+conf.Font+"' -V colorlinks -V urlcolor=NavyBlue -o ./assets/"+conf.Title+".pdf")
+	cmd := exec.Command("bash", "-c", "./bin/pandoc "+inputPath+".tmp.md -t html -o ./assets/input.tmpl ; ./bin/pandoc -H ./bin/disable_float.tex -f markdown-implicit_figures --highlight-style zenburn "+inputPath+".tmp.md --pdf-engine=xelatex -t latex -V CJKmainfont='"+conf.Font+"' -V colorlinks -V urlcolor=NavyBlue -o ./assets/"+conf.Title+".pdf")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()

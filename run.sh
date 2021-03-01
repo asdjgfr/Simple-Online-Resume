@@ -11,6 +11,9 @@ echo "创建bin文件夹完成"
 # 复制pandoc到打包目录
 cp ./bin/pandoc ./build/bin/
 echo "复制pandoc完成"
+# 复制disable_float到打包目录
+cp ./bin/disable_float.tex ./build/bin/
+echo "复制disable_float完成"
 # 复制配置文件
 cp ./config.json ./build
 echo "复制配置文件完成"
